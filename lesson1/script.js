@@ -2,75 +2,146 @@
 
 //////////////// ФУНКУИИ ////////////////
 
+// 29.5
+let hours;
+let min;
+function getTimeFromMinutes(num) {
+    min = num % 60;
+    hours = Math.floor(num / 60);
+
+    let horsStr = '';
+
+    switch (hours) {
+        case 0:
+            horsStr = 'hours';
+            break;
+        case 1:
+            horsStr = "hours1";
+            break;
+        case 2:
+        case 3:
+        case 4:    
+            horsStr = "hours2";
+            break;
+        default:
+            horsStr = "hours1";
+            break;
+    }
+    return `Tish is ${hours} ${horsStr}, and ${min} minutes`;
+}
+
+console.log(getTimeFromMinutes(50));
+console.log(getTimeFromMinutes(150));
+console.log(getTimeFromMinutes(0));
+
+// 29.4
+// function getCoupeNumber(num) { // создали функцию с переменной
+//     if (num >= 1 && num <= 36 && Number.isInteger(num)) { // если num меньше или 1 и num меньше 36 и num являеться числом то делаем код ниже
+//         let coupe = 1; // создали переменная с номером купе равно 1
+//         for (let i = 0; i <= 36; i = i +4) { // создали цикл где i равна 0, который остановиться когда дойдет до 36, и за один цикл будет добавлять к i + 4
+//             if (num >= i && num <= (coupe * 4) ) { // если num больше i но меньше coupe умножить на 4 то делать код ниже
+//                 return coupe; // выдаем в ответ номер купе
+//             }
+//             coupe = coupe + 1; // если нашь номер не попал в условие выше то для следующего цикла увеличиваем номер купа на 1
+//         }
+//     }
+//     if (num == 0 || num > 36) { // если num равен нулю или больше 36 то пишем текст ниже
+//         return "Place don't exist";
+//     } else { // во всех других значениях num пишем текст ниже
+//         return "Wrong format number"; 
+//     }
+// }
+// console.log(getCoupeNumber(33));
+// console.log(getCoupeNumber(7));
+// console.log(getCoupeNumber(300));
+// console.log(getCoupeNumber(0));
+// console.log(getCoupeNumber(7.7));
+// console.log(getCoupeNumber(-10));
+
+
+// function calculateVolumeAndArea(num) { // создали функцию в которой есть переменная num
+//     if (Number.isInteger(num)) { // проверяем являеться ли переменная целым числом
+//     let volumee = num * num * num; // считаем по формуле обьём
+//     let area = 6 * (num * num); // считаем по формуле площадь
+//     return `Coube square: ${volumee}, total surface: ${area}'`; // возвращаем результат с текстом и переменными
+//     } else { // во всех других случаях, если число не являеться целым, исполняем код ниже
+//         return `Some problem, sorry!`; // вывдим текст
+//     }
+// }
+// console.log(calculateVolumeAndArea(5)); // обращаемся к нашей функции с аргументом 5
+// console.log(calculateVolumeAndArea(15));
+// console.log(calculateVolumeAndArea(15.5));
+// console.log(calculateVolumeAndArea('dds'));
+
 // 29.3
-let numberOfFilms;
+// let numberOfFilms;
 
-function start() {
-    numberOfFilms = +prompt('How many films?', '');
+// function start() {
+//     numberOfFilms = +prompt('How many films?', '');
 
-    while (numberOfFilms == '' || numberOfFilms == null || isNaN(numberOfFilms)) {
-        numberOfFilms = +prompt('Wrong value, How many films?', '');
-    }
+//     while (numberOfFilms == '' || numberOfFilms == null || isNaN(numberOfFilms)) {
+//         numberOfFilms = +prompt('Wrong value, How many films?', '');
+//     }
 
-}
-start();
+// }
+// start();
 
-let personalMovieDB = {
-    count: numberOfFilms,
-    movies: {},
-    actors: {},
-    genres: [],
-    privat: false
-};
+// let personalMovieDB = {
+//     count: numberOfFilms,
+//     movies: {},
+//     actors: {},
+//     genres: [],
+//     privat: false
+// };
 
-function rememberMyFilms() {
-for (let i = 1; i < 3; i++) {
-    let nameFilm1 = prompt('Last film?', '');
-    let ratingFilm1 = prompt('Raitng of film?', '');
-    if (nameFilm1 != "" && ratingFilm1 != "" && nameFilm1 != null && ratingFilm1 != null && nameFilm1.length < 50 && ratingFilm1.length < 50) {
-        personalMovieDB.movies[nameFilm1] = ratingFilm1;
-    } else {
-        i--;
-    }
+// function rememberMyFilms() {
+// for (let i = 1; i < 3; i++) {
+//     let nameFilm1 = prompt('Last film?', '');
+//     let ratingFilm1 = prompt('Raitng of film?', '');
+//     if (nameFilm1 != "" && ratingFilm1 != "" && nameFilm1 != null && ratingFilm1 != null && nameFilm1.length < 50 && ratingFilm1.length < 50) {
+//         personalMovieDB.movies[nameFilm1] = ratingFilm1;
+//     } else {
+//         i--;
+//     }
     
-}
-}
+// }
+// }
 
-// rememberMyFilms();
+// // rememberMyFilms();
 
-function directPersonalLevel() {
-    if (personalMovieDB.count < 10) {
-        alert('Less 10 films');
-    }
-    if (personalMovieDB.count > 10 && personalMovieDB.count < 30 ) {
-        alert('Less 30 films');
-    }
-    if (personalMovieDB.count > 30) {
-        alert('Wow! More 30 films');
-    } else {
-        alert('Some Error');
-    }
-}
+// function directPersonalLevel() {
+//     if (personalMovieDB.count < 10) {
+//         alert('Less 10 films');
+//     }
+//     if (personalMovieDB.count > 10 && personalMovieDB.count < 30 ) {
+//         alert('Less 30 films');
+//     }
+//     if (personalMovieDB.count > 30) {
+//         alert('Wow! More 30 films');
+//     } else {
+//         alert('Some Error');
+//     }
+// }
 
-// directPersonalLevel();
+// // directPersonalLevel();
 
-function showMyDB() {
-    if (personalMovieDB.privat == false) {
-        console.log(personalMovieDB);
-    } else {
-        alert('DB is private.')
-    }
-}
+// function showMyDB() {
+//     if (personalMovieDB.privat == false) {
+//         console.log(personalMovieDB);
+//     } else {
+//         alert('DB is private.')
+//     }
+// }
 
-showMyDB();
+// showMyDB();
 
-function writeYourGenres() {
-    for (let i = 1; i < 4; i++) {
-        personalMovieDB.genres[i] = prompt(`What is your ${i} genre?`, ``);
-    }
-}
+// function writeYourGenres() {
+//     for (let i = 1; i < 4; i++) {
+//         personalMovieDB.genres[i-1] = prompt(`What is your ${i} genre?`, ``);
+//     }
+// }
 
-writeYourGenres();
+// writeYourGenres();
 
 
 // 6.2
