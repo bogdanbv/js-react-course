@@ -1,7 +1,19 @@
 "use strict";
 
+//////////////// ФУНКУИИ ////////////////
+
+// 29.3
 let numberOfFilms;
-numberOfFilms = prompt('How many films?', '');
+
+function start() {
+    numberOfFilms = +prompt('How many films?', '');
+
+    while (numberOfFilms == '' || numberOfFilms == null || isNaN(numberOfFilms)) {
+        numberOfFilms = +prompt('Wrong value, How many films?', '');
+    }
+
+}
+start();
 
 let personalMovieDB = {
     count: numberOfFilms,
@@ -10,6 +22,102 @@ let personalMovieDB = {
     genres: [],
     privat: false
 };
+
+function rememberMyFilms() {
+for (let i = 1; i < 3; i++) {
+    let nameFilm1 = prompt('Last film?', '');
+    let ratingFilm1 = prompt('Raitng of film?', '');
+    if (nameFilm1 != "" && ratingFilm1 != "" && nameFilm1 != null && ratingFilm1 != null && nameFilm1.length < 50 && ratingFilm1.length < 50) {
+        personalMovieDB.movies[nameFilm1] = ratingFilm1;
+    } else {
+        i--;
+    }
+    
+}
+}
+
+// rememberMyFilms();
+
+function directPersonalLevel() {
+    if (personalMovieDB.count < 10) {
+        alert('Less 10 films');
+    }
+    if (personalMovieDB.count > 10 && personalMovieDB.count < 30 ) {
+        alert('Less 30 films');
+    }
+    if (personalMovieDB.count > 30) {
+        alert('Wow! More 30 films');
+    } else {
+        alert('Some Error');
+    }
+}
+
+// directPersonalLevel();
+
+function showMyDB() {
+    if (personalMovieDB.privat == false) {
+        console.log(personalMovieDB);
+    } else {
+        alert('DB is private.')
+    }
+}
+
+showMyDB();
+
+function writeYourGenres() {
+    for (let i = 1; i < 4; i++) {
+        personalMovieDB.genres[i] = prompt(`What is your ${i} genre?`, ``);
+    }
+}
+
+writeYourGenres();
+
+
+// 6.2
+// function gerMassiv(num) {
+//     let db = [];
+//     db[0] = num-1;
+//     db[1] = num;
+//     db[2] = num+1;
+//     return db;
+// }
+// console.log(gerMassiv(2));
+
+// 6.3
+// function getMathResult(a, b) {  // создали функцию с двумя аргументами а и b
+//     if (typeof(b) == "string" || b < 1) { // создали условие, если b являеться строкой или меньше 1
+//         return a; // то просто выводим значение a
+//     }
+//     if (typeof(b) != "string") { // создали условие что если b не равняеться строковым значением (не цифра)
+//         let c = ''; // создали переменную c пустую
+//         let result = ''; // создали переменную result пустую
+//         for (i = 1; i < b + 1; i++) { // создали цикл, количество запусков которого будет равно значению b
+//             c = a * i; // умножаем нашу переменную на первый множитель
+//             if (i == b) { // если у нас последний виток цикла то не выводим в конце ---
+//                 result = result + c; 
+//             } else {
+//             result = result + c + "---"; // записываем в нашу переменную получившееся значение из 24 строки
+//             }
+//         }
+//     return result; // выводим финальный результат, строку в которую вписаны все значения из цикла через ---
+//     }   
+// }
+// console.log(getMathResult(5, 3)); // просто запускаем функцию с подставленными значениями a и b
+// console.log(getMathResult(3, 10));
+// console.log(getMathResult(10, 5));
+// console.log(getMathResult(10, '5'));
+// console.log(getMathResult(10, 0));
+
+// let numberOfFilms;
+// numberOfFilms = prompt('How many films?', '');
+
+// let personalMovieDB = {
+//     count: numberOfFilms,
+//     movies: {},
+//     actors: {},
+//     genres: [],
+//     privat: false
+// };
 
 // for (let i = 1; i < 3; i++) {
 //     let nameFilm1 = prompt('Last film?', '');
@@ -33,32 +141,36 @@ let personalMovieDB = {
 //     }
     
 // }
-let i = 0;
-do {
-    let nameFilm1 = prompt('Last film?', '');
-    let ratingFilm1 = prompt('Raitng of film?', '');
-    if (nameFilm1 != "" && ratingFilm1 != "" && nameFilm1 != null && ratingFilm1 != null && nameFilm1.length < 50 && ratingFilm1.length < 50) {
-        personalMovieDB.movies[nameFilm1] = ratingFilm1;
-        i++;
-    } else {
-    }
+
+
+// let i = 0;
+// do {
+//     let nameFilm1 = prompt('Last film?', '');
+//     let ratingFilm1 = prompt('Raitng of film?', '');
+//     if (nameFilm1 != "" && ratingFilm1 != "" && nameFilm1 != null && ratingFilm1 != null && nameFilm1.length < 50 && ratingFilm1.length < 50) {
+//         personalMovieDB.movies[nameFilm1] = ratingFilm1;
+//         i++;
+//     } else {
+//     }
     
-}
-while (i < 2);
+// }
+// while (i < 2);
 
-if (personalMovieDB.count < 10) {
-    alert('Less 10 films');
-}
-if (personalMovieDB.count > 10 && personalMovieDB.count < 30 ) {
-    alert('Less 30 films');
-}
-if (personalMovieDB.count > 30) {
-    alert('Wow! More 30 films');
-} else {
-    alert('Some Error');
-}
+// if (personalMovieDB.count < 10) {
+//     alert('Less 10 films');
+// }
+// if (personalMovieDB.count > 10 && personalMovieDB.count < 30 ) {
+//     alert('Less 30 films');
+// }
+// if (personalMovieDB.count > 30) {
+//     alert('Wow! More 30 films');
+// } else {
+//     alert('Some Error');
+// }
 
-console.log(personalMovieDB);
+// console.log(personalMovieDB);
+
+
 
 // let numberOfFilms;
 // numberOfFilms = prompt('How many films?', '');
