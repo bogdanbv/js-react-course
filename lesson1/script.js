@@ -2,37 +2,75 @@
 
 //////////////// ФУНКУИИ ////////////////
 
-// 29.5
-let hours;
-let min;
-function getTimeFromMinutes(num) {
-    min = num % 60;
-    hours = Math.floor(num / 60);
+// 29.6
+let f = 0;
+let f2 = 0;
+let arr = [];
+function fib(num) {
+    let result = ' ';
+    if (typeof(num == 'number') && num != 0) {
+    for (let i = 0; i < num; i++ ) {
 
-    let horsStr = '';
-
-    switch (hours) {
-        case 0:
-            horsStr = 'hours';
-            break;
-        case 1:
-            horsStr = "hours1";
-            break;
-        case 2:
-        case 3:
-        case 4:    
-            horsStr = "hours2";
-            break;
-        default:
-            horsStr = "hours1";
-            break;
+        if (i == 0) {
+            arr[i] = i;
+        }
+        if (i == 1) {
+            arr[i] = i;
+        }
+        if (i > 1) {
+            arr[i] = arr[i-1] + arr[i-2];
+        }
     }
-    return `Tish is ${hours} ${horsStr}, and ${min} minutes`;
+    for (i = 0; i < num; i++) { 
+        result = result + arr[i] + ' ';
+        
+    }
+    return result;
+}
+if (num === 0) {
+    result = 'zero';
+    return result;
+} else {
+    result = "empty";
+    return result;
 }
 
-console.log(getTimeFromMinutes(50));
-console.log(getTimeFromMinutes(150));
-console.log(getTimeFromMinutes(0));
+}
+console.log(fib(6));
+console.log(fib(7));
+console.log(fib('0'));
+console.log(fib(0));
+// 29.5
+// let hours;
+// let min;
+// function getTimeFromMinutes(num) {
+//     min = num % 60;
+//     hours = Math.floor(num / 60);
+
+//     let horsStr = '';
+
+//     switch (hours) {
+//         case 0:
+//             horsStr = 'hours';
+//             break;
+//         case 1:
+//             horsStr = "hours1";
+//             break;
+//         case 2:
+//         case 3:
+//         case 4:    
+//             horsStr = "hours2";
+//             break;
+//         default:
+//             horsStr = "hours1";
+//             break;
+//     }
+//     return `Tish is ${hours} ${horsStr}, and ${min} minutes`;
+// }
+
+// console.log(getTimeFromMinutes(50));
+// console.log(getTimeFromMinutes(150));
+// console.log(getTimeFromMinutes(0));
 
 // 29.4
 // function getCoupeNumber(num) { // создали функцию с переменной
