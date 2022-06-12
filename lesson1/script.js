@@ -2,44 +2,189 @@
 
 //////////////// ФУНКУИИ ////////////////
 
+// 35.4
+
+let baseCurrencies = ['USD', 'EUR'];
+let additionalCurrencies = ['UAH', 'RUB', 'FRA', 'CNY'];
+
+function availableCurr(arr, missingCurr) {
+    let info = 'Currencies:\n';
+    let find = '';
+    
+    baseCurrencies.forEach(function(item, i, a) {
+        if (item == missingCurr) {
+            delete baseCurrencies[i];
+        }
+    });
+    additionalCurrencies.forEach(function(item, i, a) {
+        if (item == missingCurr) {
+            delete additionalCurrencies[i];
+        }
+    });
+
+
+    for (let baseKey in baseCurrencies) {
+        for (let faundKey in arr) {
+            if (baseCurrencies[baseKey] == arr[faundKey]) {
+                find = find +  baseCurrencies[baseKey] + '\n';
+            }
+        }
+    }
+    for (let baseKey2 in additionalCurrencies) {
+        for (let faundKey2 in arr) {
+            if (additionalCurrencies[baseKey2] == arr[faundKey2]) {
+                find = find +  additionalCurrencies[baseKey2] + '\n';
+            }
+        }
+    }
+    if (find.length > 2) {
+    return info + find;
+    } else {
+        return 'No available';
+    }
+
+}
+
+console.log(availableCurr(['USD', 'EUR', 'FRA'], 'CNY'));
+console.log(additionalCurrencies);
+
+
+//35.3
+// const someString = 'This is some strange string';
+
+// function reverse(str) {
+//     let arr = [];
+//     arr = str.split(" ");
+//     return arr.reverse();
+// }
+// console.log(reverse(someString));
+
+// function reverse2 (str) {
+//     let arr = [];
+//     arr = str.split(" ");
+//     let arrNew = arr.slice();
+//     let len = arr.length - 1;
+//     arr.forEach(function(item, i, a) {
+//         arrNew[i] = arr[len];
+//         len = len - 1;
+//     });
+//     return arrNew;
+// }
+// console.log(reverse2(someString));
+
+//35.2
+// const family = ['Peter', 'Ann', 'Alex', 'Linda'];
+
+// function showFamily(arr) {
+//     if (arr.length < 1) {
+//         let noinfo = "Empty array";
+//         return noinfo;
+//     } else {
+//     let str = 'Family consist of: ';
+//     let names = arr.join(", ");
+//     str += names;
+//     // arr.forEach(function(item, i , a) {
+//     //     str += `${item}, `;
+//     // })
+//     return str;
+// }
+
+// }
+// console.log(showFamily(family));
+
+// function standardizeStrings(arr) {
+//     // let str = arr.join("\n");
+//     // console.log(str.toLowerCase());
+//     arr.forEach(function (city) {
+//         console.log(city.toLowerCase());
+
+//     });
+// }
+// standardizeStrings(family);
+
+
+
+
+//35.1
+// const personalPlanPeter = {
+//     name: "Peter",
+//     age: "29",
+//     skills: {
+//         languages: ['ru', 'eng'],
+//         programmingLangs: {
+//             js: '20%',
+//             php: '10%'
+//         },
+//         exp: '1 month'
+//     },
+//     showAgeAndLanngs(objname) {
+//         let userAge = objname.age;
+//         let result = `I am ${userAge} and i speak `;
+//         let lang = objname.skills.languages.join(", ");
+//         result = result + lang.toUpperCase();
+//         return result;
+//     }
+// };
+
+// console.log(personalPlanPeter.showAgeAndLanngs(personalPlanPeter));
+
+// function showExperience(arrname) {
+//     const exp = arrname.skills.exp;
+//     return exp;
+// };
+// console.log(showExperience(personalPlanPeter));
+
+// function showProgrammingLangs(arrname) {
+//     let result = '';
+//     for (let key in arrname.skills.programmingLangs) {
+//         result = result + `Lang ${key} on ${arrname.skills.programmingLangs[key]}\n`;
+//     }
+//     return result;
+// }
+// console.log(showProgrammingLangs(personalPlanPeter));
+
+
+
+
+
 // 29.6
-let f = 0;
-let f2 = 0;
-let arr = [];
-function fib(num) {
-    let result = ' ';
-    if (typeof(num == 'number') && num != 0) {
-    for (let i = 0; i < num; i++ ) {
+// let f = 0;
+// let f2 = 0;
+// let arr = [];
+// function fib(num) {
+//     let result = ' ';
+//     if (typeof(num == 'number') && num != 0) {
+//     for (let i = 0; i < num; i++ ) {
 
-        if (i == 0) {
-            arr[i] = i;
-        }
-        if (i == 1) {
-            arr[i] = i;
-        }
-        if (i > 1) {
-            arr[i] = arr[i-1] + arr[i-2];
-        }
-    }
-    for (i = 0; i < num; i++) { 
-        result = result + arr[i] + ' ';
+//         if (i == 0) {
+//             arr[i] = i;
+//         }
+//         if (i == 1) {
+//             arr[i] = i;
+//         }
+//         if (i > 1) {
+//             arr[i] = arr[i-1] + arr[i-2];
+//         }
+//     }
+//     for (i = 0; i < num; i++) { 
+//         result = result + arr[i] + ' ';
         
-    }
-    return result;
-}
-if (num === 0) {
-    result = 'zero';
-    return result;
-} else {
-    result = "empty";
-    return result;
-}
+//     }
+//     return result;
+// }
+// if (num === 0) {
+//     result = 'zero';
+//     return result;
+// } else {
+//     result = "empty";
+//     return result;
+// }
 
-}
-console.log(fib(6));
-console.log(fib(7));
-console.log(fib('0'));
-console.log(fib(0));
+// }
+// console.log(fib(6));
+// console.log(fib(7));
+// console.log(fib('0'));
+// console.log(fib(0));
 // 29.5
 // let hours;
 // let min;
