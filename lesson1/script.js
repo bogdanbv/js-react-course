@@ -2,51 +2,132 @@
 
 //////////////// ФУНКУИИ ////////////////
 
-// 35.4
+//37.4
 
-let baseCurrencies = ['USD', 'EUR'];
-let additionalCurrencies = ['UAH', 'RUB', 'FRA', 'CNY'];
+let numberOfFilms;
 
-function availableCurr(arr, missingCurr) {
-    let info = 'Currencies:\n';
-    let find = '';
+let personalMovieDB = {
+    count: 0,
+    movies: {},
+    actors: {},
+    genres: [],
+    privat: true,
+    start: function() {
+        personalMovieDB.count = +prompt('How many films?', '');
     
-    baseCurrencies.forEach(function(item, i, a) {
-        if (item == missingCurr) {
-            delete baseCurrencies[i];
+        while (personalMovieDB.count == '' || personalMovieDB.count == null || isNaN(personalMovieDB.count)) {
+            personalMovieDB.count = +prompt('Wrong value, How many films?', '');
         }
-    });
-    additionalCurrencies.forEach(function(item, i, a) {
-        if (item == missingCurr) {
-            delete additionalCurrencies[i];
+    },
+    rememberMyFilms: function() {
+        for (let i = 1; i < 3; i++) {
+            let nameFilm1 = prompt('Last film?', '');
+            let ratingFilm1 = prompt('Raitng of film?', '');
+            if (nameFilm1 != "" && ratingFilm1 != "" && nameFilm1 != null && ratingFilm1 != null && nameFilm1.length < 50 && ratingFilm1.length < 50) {
+                personalMovieDB.movies[nameFilm1] = ratingFilm1;
+            } else {
+                i--;
+            }
+            
         }
-    });
-
-
-    for (let baseKey in baseCurrencies) {
-        for (let faundKey in arr) {
-            if (baseCurrencies[baseKey] == arr[faundKey]) {
-                find = find +  baseCurrencies[baseKey] + '\n';
+    },
+    directPersonalLevel: function() {
+        if (personalMovieDB.count < 10) {
+            return alert('Less 10 films' + personalMovieDB.count);
+        }
+        if (personalMovieDB.count > 10 && personalMovieDB.count < 30 ) {
+            return alert('Less 30 films' + personalMovieDB.count);
+        }
+        if (personalMovieDB.count > 30) {
+            return alert('Wow! More 30 films' + personalMovieDB.count);
+        } else {
+            return alert('Some Error' + personalMovieDB.count);
+        }
+    },
+    showMyDB: function() {
+        if (personalMovieDB.privat == false) {
+            alert("show db");
+        } else {
+            alert('DB is private.');
+        }
+    },
+    writeYourGenres: function() {
+        for (let i = 1; i < 4; i++) {
+            personalMovieDB.genres[i-1] = prompt(`What is your ${i} genre?`, ``);
+            while (personalMovieDB.genres[i-1] == '' || personalMovieDB.genres[i-1] == null) {
+                personalMovieDB.genres[i-1] = prompt(`What is your ${i} genre?`, ``);
             }
         }
-    }
-    for (let baseKey2 in additionalCurrencies) {
-        for (let faundKey2 in arr) {
-            if (additionalCurrencies[baseKey2] == arr[faundKey2]) {
-                find = find +  additionalCurrencies[baseKey2] + '\n';
-            }
+        personalMovieDB.genres.forEach((item, i) => {
+            console.log(`Favorit genre ${i+1} is ${item}`);
+        }
+        );
+        
+    },
+    toggleVisibleMyDB: function() {
+        if (personalMovieDB.privat) {
+            personalMovieDB.privat = false;
+        } else {
+            personalMovieDB.privat = true;
         }
     }
-    if (find.length > 2) {
-    return info + find;
-    } else {
-        return 'No available';
-    }
+};
+// personalMovieDB.start();
+// personalMovieDB.rememberMyFilms();
+// personalMovieDB.directPersonalLevel();
+personalMovieDB.writeYourGenres();
+// personalMovieDB.toggleVisibleMyDB();
+// personalMovieDB.showMyDB();
+console.log(personalMovieDB);
 
-}
 
-console.log(availableCurr(['USD', 'EUR', 'FRA'], 'CNY'));
-console.log(additionalCurrencies);
+
+
+
+// 35.4
+// let baseCurrencies = ['USD', 'EUR'];
+// let additionalCurrencies = ['UAH', 'RUB', 'FRA', 'CNY'];
+
+// function availableCurr(arr, missingCurr) {
+//     let info = 'Currencies:\n';
+//     let find = '';
+    
+//     baseCurrencies.forEach(function(item, i, a) {
+//         if (item == missingCurr) {
+//             delete baseCurrencies[i];
+//         }
+//     });
+//     additionalCurrencies.forEach(function(item, i, a) {
+//         if (item == missingCurr) {
+//             delete additionalCurrencies[i];
+//         }
+//     });
+
+
+//     for (let baseKey in baseCurrencies) {
+//         for (let faundKey in arr) {
+//             if (baseCurrencies[baseKey] == arr[faundKey]) {
+//                 find = find +  baseCurrencies[baseKey] + '\n';
+//             }
+//         }
+//     }
+//     for (let baseKey2 in additionalCurrencies) {
+//         for (let faundKey2 in arr) {
+//             if (additionalCurrencies[baseKey2] == arr[faundKey2]) {
+//                 find = find +  additionalCurrencies[baseKey2] + '\n';
+//             }
+//         }
+//     }
+//     if (find.length > 2) {
+//     return info + find;
+//     } else {
+//         return 'No available';
+//     }
+
+// }
+
+// console.log(availableCurr(['USD', 'EUR', 'FRA'], 'CNY'));
+// console.log(additionalCurrencies);
 
 
 //35.3
