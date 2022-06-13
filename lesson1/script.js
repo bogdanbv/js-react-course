@@ -3,29 +3,90 @@
 //////////////// ФУНКУИИ ////////////////
 
 
-// 37.14
-
-const students = ['Peter', 'Andrew', 'Ann', 'Mark', 'Josh', 'Sandra', 'Cris', 'Bernard', 'Takesi', 'Sam'];
-
-function sortStudentsByGroups(arr) {
-    arr.sort();
-    const a = [], b = [], c = [], rest = [];
-
-    for (let i = 0; i < arr.length; i++) {
-        if (i < 3) {
-            a.push(arr[i]);
-        } else if (i < 6) {
-            b.push(arr[i]);
-        } else if (i < 9) {
-            c.push(arr[i]);
-        } else {
-            rest.push(arr[i]);
+// 41.1
+const restorantData = {
+    menu: [
+        {
+            name: 'Salad Caesar',
+            price: '14$'
+        },
+        {
+            name: 'Pizza Diavola',
+            price: '9$'
+        },
+        {
+            name: 'Beefsteak',
+            price: '17$'
+        },
+        {
+            name: 'Napoleon',
+            price: '7$'
         }
-    }
-    return [a,b,c, `Оставшиеся студенты: ${rest.length === 0 ? '-' : rest.join(', ')}`]
+    ],
+    waitors: [
+        {name: 'Alice', age: 22}, {name: 'John', age: 24}
+    ],
+    averageLunchPrice: '20$',
+    openNow: true
+};
+
+function isOpen(prop) {
+    let answer = '';
+    prop ? answer = 'Открыто' : answer = 'Закрыто';
+
+    return answer;
 }
 
-sortStudentsByGroups(students);
+console.log(isOpen(restorantData.openNow));
+
+function isAverageLunchPriceTrue(fDish, sDish, average) {
+    if ((+fDish.price.slice(0, -1) + (sDish.price)) < parseInt(average, 10)) {
+        return 'Цена ниже средней';
+    } else {
+        return 'Цена выше средней';
+    }
+}
+
+console.log(isAverageLunchPriceTrue(restorantData.menu[0], restorantData.menu[1], restorantData.averageLunchPrice));
+
+function transferWaitors(data) { debugger
+    const copy = Object.assign({}, data);
+
+    copy.waitors = [{name: 'Mike', age: 32}];
+    return copy;
+}
+
+console.log(transferWaitors(restorantData));
+console.log(restorantData);
+
+const add = {z: 66,q: 77}; // новый обьект
+const clone = Object.assign({}, add); // клонирование обьекта через метод assign
+clone.d = 55;
+console.log(add);
+console.log(clone);
+
+
+// const students = ['Peter', 'Andrew', 'Ann', 'Mark', 'Josh', 'Sandra', 'Cris', 'Bernard', 'Takesi', 'Sam'];
+
+// function sortStudentsByGroups(arr) {
+//     arr.sort();
+//     const a = [], b = [], c = [], rest = [];
+
+//     for (let i = 0; i < arr.length; i++) {
+//         if (i < 3) {
+//             a.push(arr[i]);
+//         } else if (i < 6) {
+//             b.push(arr[i]);
+//         } else if (i < 9) {
+//             c.push(arr[i]);
+//         } else {
+//             rest.push(arr[i]);
+//         }
+//     }
+//     return [a,b,c, `Оставшиеся студенты: ${rest.length === 0 ? '-' : rest.join(', ')}`]
+// }
+
+// sortStudentsByGroups(students);
 
 
 // 37.13
