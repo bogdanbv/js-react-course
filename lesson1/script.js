@@ -2,87 +2,153 @@
 
 //////////////// ФУНКУИИ ////////////////
 
-//37.4
 
-let numberOfFilms;
+// 37.14
 
-let personalMovieDB = {
-    count: 0,
-    movies: {},
-    actors: {},
-    genres: [],
-    privat: true,
-    start: function() {
-        personalMovieDB.count = +prompt('How many films?', '');
-    
-        while (personalMovieDB.count == '' || personalMovieDB.count == null || isNaN(personalMovieDB.count)) {
-            personalMovieDB.count = +prompt('Wrong value, How many films?', '');
-        }
-    },
-    rememberMyFilms: function() {
-        for (let i = 1; i < 3; i++) {
-            let nameFilm1 = prompt('Last film?', '');
-            let ratingFilm1 = prompt('Raitng of film?', '');
-            if (nameFilm1 != "" && ratingFilm1 != "" && nameFilm1 != null && ratingFilm1 != null && nameFilm1.length < 50 && ratingFilm1.length < 50) {
-                personalMovieDB.movies[nameFilm1] = ratingFilm1;
-            } else {
-                i--;
-            }
-            
-        }
-    },
-    directPersonalLevel: function() {
-        if (personalMovieDB.count < 10) {
-            return alert('Less 10 films' + personalMovieDB.count);
-        }
-        if (personalMovieDB.count > 10 && personalMovieDB.count < 30 ) {
-            return alert('Less 30 films' + personalMovieDB.count);
-        }
-        if (personalMovieDB.count > 30) {
-            return alert('Wow! More 30 films' + personalMovieDB.count);
+const students = ['Peter', 'Andrew', 'Ann', 'Mark', 'Josh', 'Sandra', 'Cris', 'Bernard', 'Takesi', 'Sam'];
+
+function sortStudentsByGroups(arr) {
+    arr.sort();
+    const a = [], b = [], c = [], rest = [];
+
+    for (let i = 0; i < arr.length; i++) {
+        if (i < 3) {
+            a.push(arr[i]);
+        } else if (i < 6) {
+            b.push(arr[i]);
+        } else if (i < 9) {
+            c.push(arr[i]);
         } else {
-            return alert('Some Error' + personalMovieDB.count);
-        }
-    },
-    showMyDB: function() {
-        if (personalMovieDB.privat == false) {
-            alert("show db");
-        } else {
-            alert('DB is private.');
-        }
-    },
-    writeYourGenres: function() {
-        for (let i = 1; i < 4; i++) {
-            personalMovieDB.genres[i-1] = prompt(`What is your ${i} genre?`, ``);
-            while (personalMovieDB.genres[i-1] == '' || personalMovieDB.genres[i-1] == null) {
-                personalMovieDB.genres[i-1] = prompt(`What is your ${i} genre?`, ``);
-            }
-        }
-        personalMovieDB.genres.forEach((item, i) => {
-            console.log(`Favorit genre ${i+1} is ${item}`);
-        }
-        );
-        
-    },
-    toggleVisibleMyDB: function() {
-        if (personalMovieDB.privat) {
-            personalMovieDB.privat = false;
-        } else {
-            personalMovieDB.privat = true;
+            rest.push(arr[i]);
         }
     }
-};
+    return [a,b,c, `Оставшиеся студенты: ${rest.length === 0 ? '-' : rest.join(', ')}`]
+}
+
+sortStudentsByGroups(students);
+
+
+// 37.13
+// const shoppingMallData = {
+//     shops: [
+//         {
+//             width: 10,
+//             length: 5
+//         },
+//         {
+//             width: 15,
+//             length: 7
+//         },
+//         {
+//             width: 20,
+//             length: 5
+//         },
+//         {
+//             width: 8,
+//             length: 10
+//         }
+//     ],
+//     height: 5,
+//     moneyPer1m3: 1,
+//     budget: 50000
+// }
+
+// function isBudgetEnough(data) {
+//     let allShopsSquare = 0;
+//     let allShopsWidth = 0;
+//     let allShopsLength = 0;
+//     for (let key in data.shops) {
+//         allShopsWidth = allShopsWidth + data.shops[key].width;
+//         allShopsLength = allShopsWidth + data.shops[key].length;
+
+//     };
+//     allShopsSquare = allShopsWidth * allShopsLength;
+//     let all3square = allShopsSquare * data.height;
+//     let totalCostNeeded = all3square * data.moneyPer1m3;
+//     let bonus = data.budget - totalCostNeeded;
+//     if (totalCostNeeded < data.budget) {
+//         return console.log(`Total payment ${totalCostNeeded}$, and ${bonus}$ your bonus)`);
+//     } else {
+//         return console.log(`You need ${Math.abs(bonus)} $`);
+//     }
+//     }
+// isBudgetEnough(shoppingMallData);
+
+
+//37.4
+// let personalMovieDB = {
+//     count: 0,
+//     movies: {},
+//     actors: {},
+//     genres: [],
+//     privat: true,
+//     start: function() {
+//         personalMovieDB.count = +prompt('How many films?', '');
+    
+//         while (personalMovieDB.count == '' || personalMovieDB.count == null || isNaN(personalMovieDB.count)) {
+//             personalMovieDB.count = +prompt('Wrong value, How many films?', '');
+//         }
+//     },
+//     rememberMyFilms: function() {
+//         for (let i = 1; i < 3; i++) {
+//             let nameFilm1 = prompt('Last film?', '');
+//             let ratingFilm1 = prompt('Raitng of film?', '');
+//             if (nameFilm1 != "" && ratingFilm1 != "" && nameFilm1 != null && ratingFilm1 != null && nameFilm1.length < 50 && ratingFilm1.length < 50) {
+//                 personalMovieDB.movies[nameFilm1] = ratingFilm1;
+//             } else {
+//                 i--;
+//             }
+            
+//         }
+//     },
+//     directPersonalLevel: function() {
+//         if (personalMovieDB.count < 10) {
+//             return alert('Less 10 films' + personalMovieDB.count);
+//         }
+//         if (personalMovieDB.count > 10 && personalMovieDB.count < 30 ) {
+//             return alert('Less 30 films' + personalMovieDB.count);
+//         }
+//         if (personalMovieDB.count > 30) {
+//             return alert('Wow! More 30 films' + personalMovieDB.count);
+//         } else {
+//             return alert('Some Error' + personalMovieDB.count);
+//         }
+//     },
+//     showMyDB: function() {
+//         if (personalMovieDB.privat == false) {
+//             alert("show db");
+//         } else {
+//             alert('DB is private.');
+//         }
+//     },
+//     writeYourGenres: function() {
+//         for (let i = 1; i < 4; i++) {
+//             personalMovieDB.genres[i-1] = prompt(`What is your ${i} genre?`, ``);
+//             while (personalMovieDB.genres[i-1] == '' || personalMovieDB.genres[i-1] == null) {
+//                 personalMovieDB.genres[i-1] = prompt(`What is your ${i} genre?`, ``);
+//             }
+//         }
+//         personalMovieDB.genres.forEach((item, i) => {
+//             console.log(`Favorit genre ${i+1} is ${item}`);
+//         }
+//         );
+        
+//     },
+//     toggleVisibleMyDB: function() {
+//         if (personalMovieDB.privat) {
+//             personalMovieDB.privat = false;
+//         } else {
+//             personalMovieDB.privat = true;
+//         }
+//     }
+// };
 // personalMovieDB.start();
 // personalMovieDB.rememberMyFilms();
 // personalMovieDB.directPersonalLevel();
-personalMovieDB.writeYourGenres();
+// personalMovieDB.writeYourGenres();
 // personalMovieDB.toggleVisibleMyDB();
 // personalMovieDB.showMyDB();
-console.log(personalMovieDB);
-
-
-
-
+// console.log(personalMovieDB);
 
 // 35.4
 // let baseCurrencies = ['USD', 'EUR'];
