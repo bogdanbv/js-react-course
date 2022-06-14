@@ -123,7 +123,7 @@ for (let value of arr) { // перебор всех значений в масс
 }
 
 arr.forEach(function(item, i , arr) {   // метод для перебора инфы в массиве, аргументы - сам элемент который сейчас перебираем, номер по порядку, ссылка на тот массив который сейччас перебираем.
-    console.log(`${i}: ${item} in array ${arr}`); // brake и continue не сработают
+    console.log(${i}: ${item} in array ${arr}); // brake и continue не сработают
 });
 
 const str = prompt("write your text with ,", "");   // сформировать массив на основании строк, указав разделитель открывать в браузере ччтобы сработало
@@ -284,4 +284,86 @@ alert( +"Infinity" ); // infinity потому что это числовое з
 0 || "" || 2 || undefined || true || falsе // 2 потому что или запинаеться на правде
 
 
+#РАБОТА СО СТРАНИЦЕЙ
+const btns = document.getElementsByTagName('button'); // получить коллекцию всех элементов в виде псевдомассива
+const btns1 = document.getElementsByTagName('button')[1]; // получить вторую кнопку на странице
+console.log(btns[1]); // получить вторую кнопку из нашего массива
+const circles = document.getElementsByClassName('circle'); // html коллекция всех элементов с классом circle
+console.log(circles);
 
+const hearts = document.querySelectorAll('.heart'); // получить данные любого селектора CSS, есть менот forEach!!!
+console.log(hearts);
+const wrapper = document.querySelectorAll('.wrapper'); // получить данные любого селектора CSS, есть менот forEach!!!
+const hearts2 = wrapper.querySelectorAll('.heart') // можно обращатся не к document а прямо к прородителю необходимого элемента и получим только те элементы которые лежат в нашем прородителе а не на все странице document
+hearts[0].style.width = '100px'; // задать ширину первому элементу из плевдомассива heart. обращаться надо чётко к элементу а не к всему массиву
+hearts.style.cssText = `background-color: black; width: ${num}px`; // применить ко всем элементам в массиве, писать как в css надо и можно вставить переменную
+hearts.forEach(item => { // показать все элементы в массиве
+    console.log(item);
+});
+for (let i = 0; i < hearts.length; i++) { // изменить свойство всех элементов в псевдомассиве
+    hearts[i].style.backgroundColor = 'blue';
+};
+hearts.forEach(item => { // изменить свойство всех элементов в псевдомассиве
+    item.style.backgroundColor = 'blue';
+});
+
+const oneHeart = document.querySelector('.heart'); // взять только первый элемент из этого класса
+console.log(oneHeart);
+
+const div = document.createElement('div'); // создать элемент div, сейчас существует только внутри js
+const text = document.createTextNode('Hello') // создать текстовый элемент, редко используют
+div.classList.add('black'); // добавили КЛАСС из CSS файла к элементу div
+document.body.append(div); // добавить элемент div в конец body элемента
+document.querySelector('.wrapper').append(div); // получаем элемент wrapper и сразу в КОНЕЦ его помещаем div. (используют тчобы не создавать отдельную переменную для wrapper)
+document.querySelector('.wrapper').prepend(div); // получаем элемент wrapper и сразу в НАЧАЛО его помещаем div. (используют тчобы не создавать отдельную переменную для wrapper)
+hearts[0].before(div); // вставить div перед первым элементом hearts
+wrapper.insertBefore(div, hearts[0]); // вставка элемента div внутрь элемента wrapper, перед первым heart / старый вариант
+hearts[0].after(div); // вставить div после первого элемента hearts
+hearts[1].remove(); // удалить второй элемент
+wrappe.removeChild(hearts[1]); // удалить второй элемент в элементе wrapper / старая версия
+hearts[2].replaceWith(div); // заменить hearts третий, элементом div
+wrapper.replaceChild(div, hearts[2]); // заменить hearts третий, элементом div в элементе wrapper / старая версия
+
+div.innerHTML = '<h1>Hello</h1>'; // вставить html в элемент
+div.textContent = 'Hello'; // вставить текст
+div.insertAdjacentHTML('beforebegin', '<p>Hi</p>'); // вставить html перед div элементов, первый аргумент где вставить, второй - что вставить
+div.insertAdjacentHTML('afterbegin', '<p>Hi</p>'); // то же самое только вставка в начало самого div
+
+#СОБЫТИЯ
+let btn = document.querySelector('button');
+btn.addEventListener('click', () => {   // добавили обработччик события, можно назначить и на второе действие на ту же кнопку, события выполняються  порядке очереди
+    alert('Hello');
+});
+btn.addEventListener('click', () => {   // второе событие, по второму клику на ту же кнопку
+    alert('second Hello');
+});
+btn.addEventListener('click', (event) => {   // вывод события которое сделает пользователь, можем добавлять свои аргументы уже за ним
+    console.log(event);
+});
+btn.addEventListener('click', (event) => {   
+    console.log(event.target); // получаем наш элемент, то есть кнопку
+    event.target.remove(); // удаляем этот элемент
+});
+
+const delElement = (event) => { // создали в переменной функцию к которой мы обратимся ниже
+    event.target.remove();
+}
+btn.addEventListener('click', delElement); // после того как произойдёт клик, мы ссылаемся на 
+
+let i = 0;
+const delElement = (event) => { // создаём функцию в переменной которая после одного срабатывания перестанет следить за нашей кнопкой
+    console.log(event.target);
+    i++;
+    if (i == 1) {                                     // после клика произойдет действие и потом i станет равно 1, и в этом случае удалим слижение за нашим обьектом,
+        btn.removeEventListener('click', delElement); // то есть при след кликах ничего не будет происходить
+    }
+}
+btn.addEventListener('click', delElement); // после того как произойдёт клик, мы ссылаемся на 
+
+//ВСПЛЫТИЕ СОБЫТИЙ  - Если одно действие присвоено для двух элементов, элемента А который лежит внтри Б, то оно сработает с начала для А, а потом для Б, и currenTarget будут разными 
+
+const link = document.querySelector('a'); // с
+link.addEventListener('click', function(event) { // создаём функцию для нашего обработчика и передаём в неё наше событие
+    event.preventDefault; // отменить стандартное действие браузера, которое он делал при клике на ссылку (переходил по ней)
+    console.log(event);
+});
