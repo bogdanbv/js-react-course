@@ -107,6 +107,12 @@ const q = {one: 1, two: 2}; // клонирование обьекта чере�
 const newQ = {...q};
 console.log(newQ);
 
+Array.isArray(data); // получаем ответ, являюется ли наше содержимое массивом
+Object.values(data); // получаем все значения обьекта в виде массива, без названий свойства
+// 
+
+
+
 №МАССИВЫ
 let arr = ['Dave', 'Ithon', 4, 'Alex'];
 console.log(arr[1]); // показать второе значение массива
@@ -216,6 +222,99 @@ function lernJS (lang, callback) { // использования каллбек�
 }
 function done() { console.log("Done")};
 lernJS ("Javascript", done);
+
+
+#РЕКУРСИЯ когда функция вызывает себя же внутри себя 
+// функция возведения числа в определённую степерь способом цикла и рекурсии
+function pow(x, n) {
+    let result = 1;
+    for (let i = 0; i < n; i++) {
+        result = result * x;
+    }
+    return result;
+};
+
+function pow(x, n) { // функция будет запускать сама себя, n - глубина рекурсии (общее число вызовов функции)
+    if (n === 1) { // это база рекурсии
+        return x;
+    } else {
+        return x * pow(x, n - 1); // n - 1 это шаг рекурсии
+    }
+};
+console.log(pow(2, 4));
+
+let students = {
+    js: [{
+        name: 'John',
+        progress: 100    
+    }, {
+        name: 'Ivan',
+        progress: 80
+    }],
+
+    html: {
+        basic: [{
+            name: 'Peter',
+            progress: 20
+        }, {
+            name: 'Ann',
+            progress: 18
+        }],
+        pro: [{
+            name: 'Sam',
+            progress: 10
+        }]
+    }
+}
+
+function getTotalProgerssByIteration(data) { // получаем через цикл
+    let total = 0;
+    let students = 0;
+
+    for (let course of Object.values(data)) {
+        if (Array.isArray(course)) {
+            students += course.length;
+
+            for (let i = 0; i < course.length; i++) {
+                total += course[i].progress;
+            }
+        } else {
+            for (let subCourse of Object.values(course)) {
+                students += subCourse.length;
+
+                for (let i = 0; i < subCourse.length; i++) {
+                    total += subCourse[i].progress;
+                }
+            }
+        }
+    }
+    return total / students;
+}
+console.log(getTotalProgerssByIteration(students));
+
+function getTotalProgerssByRecursion(data) { // получаем черех рекурсию, плюс в том что если данные/свойства вложенные добавяться то эта функция сможет работать без проблем
+    if (Array.isArray(data)) {
+        let total = 0;
+
+        for (let i = 0; i < data.length; i++) {
+            total += data[i].progress;
+        }
+
+        return [total, data.length];
+    } else {
+        let total = [0, 0];
+
+        for (let subData of Object.values(data)) {
+            const subDataArray = getTotalProgerssByRecursion(subData);
+            total[0] += subDataArray[0];
+            total[1] += subDataArray[1];
+        }
+        return total;
+
+    }
+}
+const result = getTotalProgerssByRecursion(students);
+console.log(result[0]/result[1]);
 
 
 
@@ -329,6 +428,33 @@ div.textContent = 'Hello'; // вставить текст
 div.insertAdjacentHTML('beforebegin', '<p>Hi</p>'); // вставить html перед div элементов, первый аргумент где вставить, второй - что вставить
 div.insertAdjacentHTML('afterbegin', '<p>Hi</p>'); // то же самое только вставка в начало самого div
 
+№DOM ЭЛЕМЕНТЫ И УЗЛЫ
+document.addEventListener('DOMContentLoaded', () => {}); // условие, когда вся дом структура страницы загружена
+document.documentElement; // доступ к тегу html, то есть всей видимой странице
+document.body.childNodes; // получить все узлы (ноды), которые являються детьми у body тега
+//== не все ноды являються дом элементами, то есть текст это нода, а теги это нода элементы дом.
+document.body.firstChild; // обращаемся к первой ноде
+document.body.lastChild; // обращаемся к последней ноде
+document.querySelector('#current').parentNode; // получить родительскую ноду элемента current
+document.querySelector('#current').parentNode.parentNode; // получить родительскую ноду на 2 уровня выше
+document.querySelector('#current').previousSibling; // получить предыдущую ноду (соседа)
+document.querySelector('#current').nextSibling; // следующу ноду (соседа)
+
+<li data-current="3">text</li> document.querySelector('[data-current="3"]'); // установка дата селектора в коде html и обращение к нему 
+
+document.querySelector('#current').parentElement.parentElement; // получить родительский ЕЛЕМЕНТ на 2 уровня выше
+document.querySelector('#current').previousElementSibling; // получить предыдущий элемент (соседа)
+document.querySelector('#current').nextElementSibling; // следующий элемент (соседа)
+document.body.firstElementChild; // полуить первый элемент body
+
+for (let node of document.body.childNodes) { // перебираем все ноды получчив их с buddy методом childNodees
+    if (node.nodeName == '#text') { // если назодим текстовую ноду то ничего не делаем
+        continue;
+    }
+    console.log(node); // отображаем все ноды
+}
+
+
 #СОБЫТИЯ
 let btn = document.querySelector('button');
 btn.addEventListener('click', () => {   // добавили обработччик события, можно назначить и на второе действие на ту же кнопку, события выполняються  порядке очереди
@@ -363,7 +489,14 @@ btn.addEventListener('click', delElement); // после того как про�
 //ВСПЛЫТИЕ СОБЫТИЙ  - Если одно действие присвоено для двух элементов, элемента А который лежит внтри Б, то оно сработает с начала для А, а потом для Б, и currenTarget будут разными 
 
 const link = document.querySelector('a'); // с
-link.addEventListener('click', function(event) { // создаём функцию для нашего обработчика и передаём в неё наше событие
-    event.preventDefault; // отменить стандартное действие браузера, которое он делал при клике на ссылку (переходил по ней)
-    console.log(event);
+link.addEventListener('click', function(event) { // создаём функцию для нашего обработчика и передаём в неё наше элемент
+    event.preventDefault(); // отменить стандартное действие браузера, которое он делал при клике на ссылку (переходил по ней)
+    console.log(event); // просто покажем нашш елемент
 });
+
+const butns = document.querySelectorAll('button'); // получили псевдомассив со всеми кнопками
+butns.forEach( function(item) {  // переберём все кнопки внутри массива
+    item.addEventListener('click', delElement); // задаим для события клик ссылку на функцию delElement
+});
+
+item.addEventListener('click', delElement, {once: true}); // добавили третью опцию, котрая позволит произвести событие только один раз

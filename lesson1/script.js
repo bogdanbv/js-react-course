@@ -3,67 +3,82 @@
 //////////////// ФУНКУИИ ////////////////
 
 
-// 41.1
-const restorantData = {
-    menu: [
-        {
-            name: 'Salad Caesar',
-            price: '14$'
-        },
-        {
-            name: 'Pizza Diavola',
-            price: '9$'
-        },
-        {
-            name: 'Beefsteak',
-            price: '17$'
-        },
-        {
-            name: 'Napoleon',
-            price: '7$'
-        }
-    ],
-    waitors: [
-        {name: 'Alice', age: 22}, {name: 'John', age: 24}
-    ],
-    averageLunchPrice: '20$',
-    openNow: true
-};
+// //47
+// function factorial(n) {
+// let b = n - 1;
+//     if (typeof(n) == 'number') {
+//     if (b == 0) {
+//     return n;
+//     }else {
+//         return n * factorial(n - 1);
+//     }}
+//     else {
+//         return 'problem';
+//     }
+// }
+// console.log(factorial(5));
 
-function isOpen(prop) {
-    let answer = '';
-    prop ? answer = 'Открыто' : answer = 'Закрыто';
+// // 41.1
+// const restorantData = {
+//     menu: [
+//         {
+//             name: 'Salad Caesar',
+//             price: '14$'
+//         },
+//         {
+//             name: 'Pizza Diavola',
+//             price: '9$'
+//         },
+//         {
+//             name: 'Beefsteak',
+//             price: '17$'
+//         },
+//         {
+//             name: 'Napoleon',
+//             price: '7$'
+//         }
+//     ],
+//     waitors: [
+//         {name: 'Alice', age: 22}, {name: 'John', age: 24}
+//     ],
+//     averageLunchPrice: '20$',
+//     openNow: true
+// };
 
-    return answer;
-}
+// function isOpen(prop) {
+//     let answer = '';
+//     prop ? answer = 'Открыто' : answer = 'Закрыто';
 
-console.log(isOpen(restorantData.openNow));
+//     return answer;
+// }
 
-function isAverageLunchPriceTrue(fDish, sDish, average) {
-    if ((+fDish.price.slice(0, -1) + (sDish.price)) < parseInt(average, 10)) {
-        return 'Цена ниже средней';
-    } else {
-        return 'Цена выше средней';
-    }
-}
+// console.log(isOpen(restorantData.openNow));
 
-console.log(isAverageLunchPriceTrue(restorantData.menu[0], restorantData.menu[1], restorantData.averageLunchPrice));
+// function isAverageLunchPriceTrue(fDish, sDish, average) {
+//     if ((+fDish.price.slice(0, -1) + (sDish.price)) < parseInt(average, 10)) {
+//         return 'Цена ниже средней';
+//     } else {
+//         return 'Цена выше средней';
+//     }
+// }
 
-function transferWaitors(data) { debugger
-    const copy = Object.assign({}, data);
+// console.log(isAverageLunchPriceTrue(restorantData.menu[0], restorantData.menu[1], restorantData.averageLunchPrice));
 
-    copy.waitors = [{name: 'Mike', age: 32}];
-    return copy;
-}
+// function transferWaitors(data) { debugger
+//     const copy = Object.assign({}, data);
 
-console.log(transferWaitors(restorantData));
-console.log(restorantData);
+//     copy.waitors = [{name: 'Mike', age: 32}];
+//     return copy;
+// }
 
-const add = {z: 66,q: 77}; // новый обьект
-const clone = Object.assign({}, add); // клонирование обьекта через метод assign
-clone.d = 55;
-console.log(add);
-console.log(clone);
+// console.log(transferWaitors(restorantData));
+// console.log(restorantData);
+
+// const add = {z: 66,q: 77}; // новый обьект
+// const clone = Object.assign({}, add); // клонирование обьекта через метод assign
+// clone.d = 55;
+// console.log(add);
+// console.log(clone);
 
 
 // const students = ['Peter', 'Andrew', 'Ann', 'Mark', 'Josh', 'Sandra', 'Cris', 'Bernard', 'Takesi', 'Sam'];
