@@ -473,7 +473,10 @@ for (let node of document.body.childNodes) { // перебираем все но
 }
 const wrapper = document.querySelectorAll('.btn-block'); // создаём переменную в которой содержаться все кнопки
 wrapper.addEventListener('click', (event) => {  // вешаем обработчик события на весь блок кнопок
-    if (event.target  && event.target.tagName == "BUTTON") { // проверяем существует ли event.target и так же определяем что это клик по кнопке (если в свойствах есть BUtton)
+    if (event.target  && event.target.tagName == "BUTTON") { // усовие делегирования,ппроверяем существует ли event.target и так же определяем что это клик по кнопке (если в свойствах есть BUtton)
+        console.log('hello');
+    }
+    if (event.target  && event.target.classList.contains('blue')) { // проверяем существует ли event.target и производим действие если класс кнопкии blue
         console.log('hello');
     }
 });
