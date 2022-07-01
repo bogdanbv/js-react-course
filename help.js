@@ -316,6 +316,25 @@ function getTotalProgerssByRecursion(data) { // получаем черех ре
 const result = getTotalProgerssByRecursion(students);
 console.log(result[0]/result[1]);
 
+const timerId = setTimeout(function() { // функция которая вызываеться с задержкой
+    console.log('Hello');
+}, 2000); // задержка 2000 милисикунд
+clearInterval(timerId); // отменить наш таймер, например если действие нужное нам уже было совершено
+
+const timerId = setTimeout(logger, 2000); // вызвать функцию с задержкой
+function logger() {
+    if (i == 3) { // остановить выполнение таймера после 3х повторений
+        clearInterval(timerId);
+    };
+    console.log('text');
+    i++;
+}
+const timerid = setInterval(logger, 2000); // функция будет вызываться через каждые 2 сек, пока мы не остановим её
+
+let id = setTemeout(function log(){ 
+    console.log('Hello');
+    id = setTimeout(log, 500); // рекурсивно запускаем таймер, плюс в том что начнет выполняться только тогда когда функция выполниться
+}, 500);
 
 
 #МЕТОДЫ И СВОЙСТВА ЧИСЕЛ И строк
@@ -364,6 +383,26 @@ console.log(typeof(Boolean(!!'4'))); // преобразование в булл
 
 #РАЗНОЕ
 debugger; // ставим в коде и консоль будет отсанавливаться в это месте
+
+const now = new Date(); // переменная содержит текущую дату
+console.log(now);
+console.log(now.getFullYear());
+console.log(now.getMonth());
+console.log(now.getDate());
+console.log(now.getDay());
+console.log(now.getHours()); // текущие часы
+console.log(now.getUTCHours()); // часы UTC
+console.log(now.getTime()); // TimeStamp количество милисикунд с 1970 года
+console.log(now.setHours(18)); // установить часы
+new Date.parse('2020-05-01'); // установить дату через метод
+
+let start = new Date();
+for (let i = 0; i < 100000; i++) {
+    let some = i ** 3;
+}
+let end = new Date;
+console.log(`цикл отработал за ${end - start}`); // бенчмарк цикла
+
 
 #Задачки
 let x = 5; alert( x++ ); // 5 потому что постфексный оператор применяется для следующих строк
