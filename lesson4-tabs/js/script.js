@@ -100,4 +100,53 @@ window.addEventListener('DOMContentLoaded', () =>{
     
     setClock(".timer", deadliine);
 
+    // Modal
+    const modalTrigger = document.querySelectorAll('[data-modal]'),
+          modal = document.querySelector('.modal'),
+          modalCloseBtn = document.querySelector('[data-close]');
+    
+    function openModal() {
+        modal.classList.add('show');
+        modal.classList.remove('hide');
+        document.body.style.overflow = 'hidden';
+    }
+
+    modalTrigger.forEach(item => {
+        item.addEventListener('click', () => {
+            openModal();
+        });
+    });
+
+    function closeModal(){
+        modal.classList.add('hide');
+        modal.classList.remove('show');
+        document.body.style.overflow = '';
+        clearInterval(modalTimerId);
+    }
+
+    modalCloseBtn.addEventListener('click', closeModal);
+
+    modal.addEventListener('click', (event) => {
+        if (event.target == modal) {
+            closeModal();
+        }
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.code === 'Escape' && modal.classList.contains('show')) {
+            closeModal();
+        }
+    });
+
+    const modalTimerId = setTimeout(openModal, 15000);
+
+    function showModalByScroll() {
+        if (window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight - 1) { // складываем высоту экрана и количество прокрученных пикселей, и сравниваем с общей высотой страницы 
+            openModal();
+            window.removeEventListener('scroll', showModalByScroll); // удалим обработчик чтобы окно не выскакивало во второй раз
+        }
+    }
+
+    window.addEventListener('scroll', showModalByScroll);
+
 });

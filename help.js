@@ -484,6 +484,28 @@ btns[0].addEventListener('click', () => {   // пример работы бур�
     // btns[1].classList.toggle('red); // добавляем клаасс к нашей кнопке способом toggle
 });
 
+const box = document.querySelector('.box'), // получаем элемент
+      btn = document.querySelector('button');
+const width = box.clientWidth; // получаем ширину элемента в браузере пользователя
+const height = box.clientHeight;
+btn.addEventListener('click', () =>{
+    box.style.health = box.scrollHeight + 'px'; // при клике на кнопку высота окна станет во всю высоту документа
+    console.log(box.scrollTop); // показать колько пикселей уже пролистали
+})
+console.log(box.gerBoundingCLientRect()); // получть все координаты которые есть у элемента 
+window.getComputedStyle(box); // получить уже применённые стили к элементу из css
+window.getComputedStyle(box).display // получить свойство display
+document.documentElement.clientHeight; // получить высоту всей страницы
+document.documentElement.scrollTop = 0; // вернуть странику в самый верх
+window.scrollBy(0, 400); // переместиться на 400 пискселей вниз от текущей точки
+window.scrollTo(0, 400); // переместиться на 400 в абсолютной величине
+
+document.addEventListener('keydown', (event) => {
+    if (event.code === 'Escape') { // вызвать код при нажатии кнопки Escape
+        closeModal();
+    }
+});
+
 
 №DOM ЭЛЕМЕНТЫ И УЗЛЫ
 document.addEventListener('DOMContentLoaded', () => {}); // условие, когда вся дом структура страницы загружена
