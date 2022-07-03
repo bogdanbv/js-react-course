@@ -300,6 +300,36 @@ obj.sayNumber();
 const double = (a) => a * 2; // если стрелочная функция помещаеться в одну строку то можно так её записать, и не надо ставить return
 
 
+#КЛАССЫ // красивая обёртка функций конструкторов
+class Rectangle { // название класса всегда с большой буквы
+    constructor(height, width) { // создаём экземпляр класса с двумя параметрами
+        this.height = height;
+        this.width = width;
+    }
+    calcArea() { // создаём метод
+        return this.height * this.width;
+    }
+}
+const square = new Rectangle(10, 10);
+const long = new Rectangle(12, 200);
+console.log(square.calcArea());
+console.log(long.calcArea());
+
+class ColredRectangleWithText extends Rectangle { // создаем новый класс с наследованием от другого
+    constructor(height, width, text, bgColor) {
+        super(height, width); // строки записанные в родителе в разделе конструктор автоматически перейдут сюда, должно быть всегда на первом месте в конструкторе, можно указать только нужные свойства super(height, width);
+        this.text = text;
+        this.bgColor = bgColor;
+    }
+    showMyProps() {
+        console.log(`Text: ${this.text}, Color: ${this.bgColor}`);
+    }
+}
+let div = new ColredRectangleWithText(25, 10, 'Hello', 'red');
+div.showMyProps();
+console.log(div.calcArea());
+
+
 
 #РЕКУРСИЯ когда функция вызывает себя же внутри себя 
 // функция возведения числа в определённую степерь способом цикла и рекурсии
