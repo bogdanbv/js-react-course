@@ -449,6 +449,21 @@ let id = setTemeout(function log(){
     id = setTimeout(log, 500); // рекурсивно запускаем таймер, плюс в том что начнет выполняться только тогда когда функция выполниться
 }, 500);
 
+#JSON
+const persone = {
+    name: 'Alex',
+    tel: '+56474343',
+    parents: {
+        mom: 'Ola',
+        dad: 'Mike'
+    }
+};
+console.log(JSON.stringify(persone)); // используют чтобы отправить данные на сервер, данные в JSON будут всегда обьектом с разделением двойными кавычками
+console.log(JSON.parse(JSON.stringify(persone))); // получть данные с сервера (на примере с нашего файла)
+const clone = JSON.parse(JSON.stringify(persone)); // полностью клонируем весь обьект, получаем обьект в формате JSON и потом распарсим его обратно в обычный обьект. клон не будет зависить от обьекта которого он клонировал
+clone.parents.mom = 'Ann';
+console.log(persone);
+console.log(clone);
 
 #МЕТОДЫ И СВОЙСТВА ЧИСЕЛ И строк
 console.dir(Number); // просмотреть все методы и свойства чисел в консоли
