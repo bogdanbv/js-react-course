@@ -1,3 +1,4 @@
+"use strict";
 window.addEventListener('DOMContentLoaded', () =>{
     // Tabs
     const tabs = document.querySelectorAll('.tabheader__item'),
@@ -212,7 +213,7 @@ window.addEventListener('DOMContentLoaded', () =>{
         "elite",
         'Меню “Премиум”',
         'Меню “Премиум” мы используем не только красивый дизайн упаковки, но и качественное исполнение блюд. Красная рыба, морепродукты, фрукты - ресторанное меню без похода в ресторан!',
-        3,
+        33,
         '.menu .container'
     ).render();
 
@@ -225,6 +226,53 @@ window.addEventListener('DOMContentLoaded', () =>{
         '.menu .container',
         'menu__item'
     ).render();
+
+    // Forms
+
+    const forms = document.querySelectorAll('form');
+    
+    const message = {
+        loading: 'Loading..',
+        success: 'Thanks, we will call you soon',
+        failure: 'Some problem'
+    };
+
+    forms.forEach(item => { // добавили функцию postData ко всем нашим формам на странице
+        postData(item);
+    });
+
+    function postData(form) {
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const statusMessage = document.createElement('div'); // создали новый элемент для вывода статуса отправки данных
+            statusMessage.classList.add('status'); // присвоили класс этому элементу
+            statusMessage.textContent = message.loading; // вставляем текст из переменной в наш элемент
+            form.append(statusMessage); // отправили этот элемент в нашу форму
+
+            const request = new XMLHttpRequest();
+            request.open('POST', 'server.php'); // метод запроса и путь к файлу
+            
+            // request.setRequestHeader('Content-type', 'miltipart/form-data'); // устанавливаем формат в котором будем отправлять форму, но для dataForm этого делать ненадо!!!
+            const formData = new FormData(form); // формат данных FormData - вариант простого получения данных из формы
+        
+            request.send(formData); // отправляем данные на сервер
+
+            request.addEventListener('load', () => { // добавили действие при загрузке отправки данных
+                if (request.status === 200) { // если ответ от сервера 200 ОК (значит все ок)
+                    console.log(request.response); // выводим ответ сервера в консоль
+                    statusMessage.textContent = message.success; // иизменили статус в форме для информирования пользователя
+                    form.reset(); // очистить данные формы
+                    setTimeout(() => {
+                        statusMessage.remove();
+                    },  3000);
+                } else {
+                    statusMessage.textContent = message.failure; // сообщить об ошибке юзеру
+                }
+            });
+        
+        });
+    }
 
 
 });
