@@ -253,10 +253,17 @@ window.addEventListener('DOMContentLoaded', () =>{
             const request = new XMLHttpRequest();
             request.open('POST', 'server.php'); // метод запроса и путь к файлу
             
-            // request.setRequestHeader('Content-type', 'miltipart/form-data'); // устанавливаем формат в котором будем отправлять форму, но для dataForm этого делать ненадо!!!
+            request.setRequestHeader('Content-type', 'application/json'); // устанавливаем формат в котором будем отправлять форму, но для dataForm этого делать ненадо!!!
             const formData = new FormData(form); // формат данных FormData - вариант простого получения данных из формы
-        
-            request.send(formData); // отправляем данные на сервер
+            
+            const object = {};
+            formData.forEach(function(value, key){
+                object[key] = value;
+            });
+
+            const json = JSON.stringify(object);
+
+            request.send(json); // отправляем данные на сервер
 
             request.addEventListener('load', () => { // добавили действие при загрузке отправки данных
                 if (request.status === 200) { // если ответ от сервера 200 ОК (значит все ок)
