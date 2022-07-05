@@ -248,13 +248,11 @@ window.addEventListener('DOMContentLoaded', () =>{
                 display: block;
                 margin: 0 auto;
             `; // вставляем текст из переменной в наш элемент
+
             // form.append(statusMessage); // отправили этот элемент в нашу форму
             form.insertAdjacentElement('afterend', statusMessage); 
 
-            const request = new XMLHttpRequest();
-            request.open('POST', 'server.php'); // метод запроса и путь к файлу
-            
-            request.setRequestHeader('Content-type', 'application/json'); // устанавливаем формат в котором будем отправлять форму, но для dataForm этого делать ненадо!!!
+            //!!!!!!!request.setRequestHeader('Content-type', 'application/json'); // устанавливаем формат в котором будем отправлять форму, но для dataForm этого делать ненадо!!!
             const formData = new FormData(form); // формат данных FormData - вариант простого получения данных из формы
             
             const object = {};
@@ -262,20 +260,35 @@ window.addEventListener('DOMContentLoaded', () =>{
                 object[key] = value;
             });
 
-            const json = JSON.stringify(object);
-
-            request.send(json); // отправляем данные на сервер
-
-            request.addEventListener('load', () => { // добавили действие при загрузке отправки данных
-                if (request.status === 200) { // если ответ от сервера 200 ОК (значит все ок)
-                    console.log(request.response); // выводим ответ сервера в консоль
-                    showThanksModal(message.success); // иизменили статус в форме для информирования пользователя
-                    form.reset(); // очистить данные формы
-                    statusMessage.remove();
-                } else {
-                    showThanksModal(message.failure); // сообщить об ошибке юзеру
-                }
+            fetch('server.php', {
+                method: "POST",
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify(object)
+            })
+            .then(data => data.text())
+            .then(data => {
+                console.log(data); // выводим ответ сервера в консоль
+                showThanksModal(message.success); // иизменили статус в форме для информирования пользователя
+                form.reset(); // очистить данные формы
+                statusMessage.remove();
+            }).catch(() => {
+                showThanksModal(message.failure); // сообщить об ошибке юзеру
+            }).finally(() => {
+                form.reset(); // очистить данные формы
             });
+
+            // request.addEventListener('load', () => { // добавили действие при загрузке отправки данных
+            //     if (request.status === 200) { // если ответ от сервера 200 ОК (значит все ок)
+            //         console.log(request.response); // выводим ответ сервера в консоль
+            //         showThanksModal(message.success); // иизменили статус в форме для информирования пользователя
+            //         form.reset(); // очистить данные формы
+            //         statusMessage.remove();
+            //     } else {
+            //         showThanksModal(message.failure); // сообщить об ошибке юзеру
+            //     }
+            // });
         
         });
     }
@@ -303,6 +316,7 @@ window.addEventListener('DOMContentLoaded', () =>{
             closeModal();
         }, 4000);
     }
+
 
 
 });

@@ -509,7 +509,19 @@ Promise.all([test(1000), test(3000)]).then(() => {console.log('All done')}); // 
 Promise.race([test(1000), test(3000)]).then(() => {console.log('All done')}); // метод promise.all принимает в себя массив с функциями, и как только хотябы одна функция отработает прейдет к then
 
 №API/FETCH API Applicatin Programming Interface // предоставление готовых методов и решений
+fetch('https://jsonplaceholder.typicode.com/todos/1') // нам возвращеться промис и можем дальше обработать его при помощи then
+        .then(response => response.json())
+        .then(json => console.log(json)); // получаем обычный обьект
 
+fetch('https://jsonplaceholder.typicode.com/posts', {
+    method: "POST", // формируем post запрос
+    body: JSON.stringify({name: 'Alex'}),
+    headers: {
+        'Content-type': 'application/json'
+    }
+})
+        .then(response => response.json()) // получаем ответ в виде json
+        .then(json => console.log(json));
 
 
 #AJAX и Cервер
