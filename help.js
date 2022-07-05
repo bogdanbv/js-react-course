@@ -465,6 +465,51 @@ clone.parents.mom = 'Ann';
 console.log(persone);
 console.log(clone);
 
+№ПРОМИСЫ Promise; // возможность работать с асинхронным кодом (с сервером/таймерами)
+console.log('Get data');
+const req = new Promise(function(resolve, reject){ // resolve вызываем если все прошло ок выполним код из then метода, а reject если ошибка и вызовем код из catch мутода
+    setTimeout(() =>{
+        console.log('Prepare data');
+        const product = {
+            name: 'TV',
+            price: 2000
+        }
+        resolve(product); // передаём данные в нашу функцию, которые сможем использовать через then внутри его
+    }, 2000);
+});
+
+req.then((product) => { // метод который выполняется на промисе в случае положительного исхода (в коде должно дойти до resolve())
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            product.status = 'order';
+            resolve(product);
+            // reject(); // можем вставить вместо верхней строки, чтобы проверить работу catch, которая будет отображена в случае какойто ошибки или может быть выведена принудительно как сейчас расскоментировав код
+        }, 2000);
+    });
+}).then(data => {
+    data.modify = true;
+    return data;
+}).then(data => {
+    console.log(data);
+}).catch(() => { // действие выполниться при ошибке или вызове reject()
+    console.error('Some error');
+}).finally(() => {// ставиться всегда в конце цепочки, действие которое будет произведено всегда, вне зависимости от исхода промисов
+    console.log('Finally'); // можем например очистить форму которую заполнял юзер
+});
+
+const test = time => { // функция которая будет запускаться и принимать в себя аргумент с количеством времени
+    return new Promise(resolve => { // функция будет возвращать нам новый промис
+        setTimeout(() => resolve(), time); // который заресолвиться через определённое время
+    });
+};
+test(1000).then(() => console.log('1000 ms'));
+test(3000).then(() => console.log('3000 ms'));
+
+Promise.all([test(1000), test(3000)]).then(() => {console.log('All done')}); // метод promise.all принимает в себя массив с функциями, и будет ждать выполнения всех их, и только потом прейдет к then
+Promise.race([test(1000), test(3000)]).then(() => {console.log('All done')}); // метод promise.all принимает в себя массив с функциями, и как только хотябы одна функция отработает прейдет к then
+
+№API/FETCH API Applicatin Programming Interface // предоставление готовых методов и решений
+
 
 
 #AJAX и Cервер
