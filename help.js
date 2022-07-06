@@ -170,6 +170,60 @@ log(...num); // передать значения массива через ра
 
 const newAaray = [...oldArray]; // создаст копию нашего массива через оператор развёртывания
 
+const names = ['Ivan', 'Ann', 'Ksenia', 'Voldemart'];
+const ShortNames = names.filter(function(name) { // метод фильтрует массив и возвращает новый отфильтрованный вариант
+    return name.length < 5;
+});
+console.log(ShortNames);
+
+let answers = ['IvAn', 'AnnA', 'Hello'];
+const result = answers.map(item => { // map позволяет взять исходный массив и изменения делать внутри его и вернет новый массив
+    return item.toLowerCase();
+});
+console.log(result);
+
+answers = answers.map(item => { //трансформирующий вариант map позволяет взять исходный массив и изменения делать внутри его и вернет новый массив
+    return item.toLowerCase();
+});
+console.log(answers);
+
+const someArr = [4, 'Johs', 'Alex']
+console.log(someArr.some(item => { // если хоть один элемент подойдёт под условие то вернет true, если не подойдет то false
+    return typeof(item) === 'number';
+}))
+console.log(someArr.every(item => { // если все элементы подходят под условие то true
+    return typeof(item) === 'number';
+}))
+
+const arr = [4, 5, 3, 23, 3];
+const res = arr.reduce((sum, current) => { // метод перебора, для того чтобы схлопывать или собирать в единое значение, возвращает результат в виде новые данные. sum = общее значение (в начале 0), current значение каждого элемента в массиве.
+    return sum + current, 3; // 3 доплнительный аргумент который устанавливает значение sum в начале = 3
+});
+console.log(res);
+
+const arr = ['apple', 'peach', 'melone'];
+const res = arr.reduce((sum, current) => { // метод перебора, для того чтобы схлопывать или собирать в единое значение, возвращает результат в виде новые данные. sum = общее значение (в начале 0), current значение каждого элемента в массиве.
+    return sum + ', ' + current;
+});
+console.log(res);
+
+const obj = {
+    ivan: 'persone',
+    ann: 'persone',
+    dog: 'animal',
+    cat: 'animal'
+};
+const newArr = Object.entries(obj); // получаем массив который содержит массивы. // метод применяемый для обьектов который позволяет обьект превратить в матрицу, то есть массив массивов
+console.log(newArr);
+const newArrPerson = Object.entries(obj)
+.filter(item => item[1] === 'persone') // получим только массиы в которых значение person
+.map(item => item[0]); // вернуть только первые значения из каждого массива
+console.log(newArrPerson);
+
+
+
+
+
 
 
 #ЦИКЛЫ
