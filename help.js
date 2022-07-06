@@ -177,7 +177,7 @@ const ShortNames = names.filter(function(name) { // метод фильтруе�
 console.log(ShortNames);
 
 let answers = ['IvAn', 'AnnA', 'Hello'];
-const result = answers.map(item => { // map позволяет взять исходный массив и изменения делать внутри его и вернет новый массив
+const result = answers.map((item, i) => { // map позволяет взять исходный массив и изменения делать внутри его и вернет новый массив
     return item.toLowerCase();
 });
 console.log(result);

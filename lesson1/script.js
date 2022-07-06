@@ -3,6 +3,94 @@
 //////////////// ФУНКУИИ ////////////////
 
 
+//89
+
+const funds = [
+    {amount: -1400},
+    {amount: 2400},
+    {amount: -1000},
+    {amount: 500},
+    {amount: 10400},
+    {amount: -11400}
+];
+
+const getPositiveIncomeAmount = (data) => {
+    const summ = data.filter(item => item.amount > 0)
+    .map(item => item.amount)
+    .reduce((sum, current) => {
+        return sum + current;
+    });
+    return summ;
+};
+
+console.log(getPositiveIncomeAmount(funds));
+
+const getTotalIncomeAmount = (data) => {
+    let allSum = data.map(item => item.amount);
+    if (allSum.some(item => item < 0)) {
+        allSum = allSum.reduce((sum, current) => {
+            return sum + current;
+        });
+        return allSum;
+    } else {
+        return getPositiveIncomeAmount(funds);
+    }
+    
+};
+console.log(getTotalIncomeAmount(funds));
+
+//88
+
+// const films = [
+//     {
+//         name: 'Titanic',
+//         rating: 9
+//     },
+//     {
+//         name: 'Die hard 5',
+//         rating: 5
+//     },
+//     {
+//         name: 'Matrix',
+//         rating: 8
+//     },
+//     {
+//         name: 'Some bad film',
+//         rating: 4
+//     }
+// ];
+
+// function showGoodFilms(arr) {
+//     return arr.filter(name => name.rating >= 8);
+// }
+// console.log(showGoodFilms(films));
+
+// function showListOfFilms(arr) {
+//     const allFilms = arr.map(item => item.name)
+//     .reduce((sum, current) => {
+//         return `${sum}, ${current}`;
+//     });
+//     return allFilms;
+// }
+// console.log(showListOfFilms(films));
+
+// function setFilmsIds(arr) {
+//     arr.map((item, i) => {
+//         item.id = i;
+//     });
+//     return arr;
+// }
+// console.log(setFilmsIds(films));
+
+// const tranformedArray = setFilmsIds(films);
+
+// function checkFilms(arr) {
+//    return arr.every(film => film.id || film.id == 0);
+// }
+
+// console.log(checkFilms(tranformedArray));
+
+
 // //47
 // function factorial(n) {
 // let b = n - 1;
