@@ -115,9 +115,11 @@ const log = function(a, b, ...rest) { // использование Rest опе�
 }
 log('basic', 'next', 'operator', 'new', 'photo'); // содержимое rest будет отображено в виде массива
 
-
-// 
-
+const obj = {a: 23, b:50};
+console.log(Object.entries(obj)); // этот метод разбивает обьект на отдельные массивы состоящие из двух элементов (матрица, массив массивов)
+console.log(Object.fromEntries(Object.entries(obj))); // обратное действие, превратить массив массивов в обьект
+const json = JSON.stringify(Object.fromEntries(formData.entries())); // превращем formData в массив массивов > превращаем в обьект > превращаем в JSON
+            
 
 
 №МАССИВЫ
@@ -518,6 +520,7 @@ const clone = JSON.parse(JSON.stringify(persone)); // полностью кло�
 clone.parents.mom = 'Ann';
 console.log(persone);
 console.log(clone);
+// json.server info https://github.com/typicode/json-server
 
 №ПРОМИСЫ Promise; // возможность работать с асинхронным кодом (с сервером/таймерами)
 console.log('Get data');
@@ -562,7 +565,7 @@ test(3000).then(() => console.log('3000 ms'));
 Promise.all([test(1000), test(3000)]).then(() => {console.log('All done')}); // метод promise.all принимает в себя массив с функциями, и будет ждать выполнения всех их, и только потом прейдет к then
 Promise.race([test(1000), test(3000)]).then(() => {console.log('All done')}); // метод promise.all принимает в себя массив с функциями, и как только хотябы одна функция отработает прейдет к then
 
-№API/FETCH API Applicatin Programming Interface // предоставление готовых методов и решений
+№API/FETCH API Applicatin Programming Interface // предоставление готовых методов и решенийаоооо
 fetch('https://jsonplaceholder.typicode.com/todos/1') // нам возвращеться промис и можем дальше обработать его при помощи then
         .then(response => response.json())
         .then(json => console.log(json)); // получаем обычный обьект
@@ -574,9 +577,11 @@ fetch('https://jsonplaceholder.typicode.com/posts', {
         'Content-type': 'application/json'
     }
 })
-        .then(response => response.json()) // получаем ответ в виде json
-        .then(json => console.log(json));
+.then(response => response.json()) // получаем ответ в виде json
+.then(json => console.log(json));
 
+res.ok // свойство промиса, узнать получилось ли получить промис
+res.status // свойство промиса, получить статус ответа
 
 #AJAX и Cервер
 const inputRub = document.querySelector('#rub'),
@@ -597,6 +602,18 @@ inputRub.addEventListener('input', () => {
         }
     });
 });
+
+const postData = async (url, data) => { // используем ассинхронный вариант исполнения кода
+    const res = await fetch(url, { // пока не виполниться эта часть, следующая не начнёться
+        method: "POST",
+        headers: {
+            'Content-type': 'application/json'
+        },
+        body: data
+    });
+
+    return await res.json();
+};
 
 
 
@@ -884,7 +901,8 @@ changedTouches // содержит именно тот палец который
 
 #NPM
 npm init //инициализация проекта
-
+npm install json-server --save-dev // установка сервера в режиме рабочей зависимости
+npx json-server fileName.json // запустить файл на сервере
 
 
 
