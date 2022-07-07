@@ -776,6 +776,7 @@ btn.addEventListener('click', () =>{
 console.log(box.gerBoundingCLientRect()); // получть все координаты которые есть у элемента 
 window.getComputedStyle(box); // получить уже применённые стили к элементу из css
 window.getComputedStyle(box).display // получить свойство display
+window.getComputedStyle(slidesWrapper).width; // получиить ширину применённых стилей к обтекту
 document.documentElement.clientHeight; // получить высоту всей страницы
 document.documentElement.scrollTop = 0; // вернуть странику в самый верх
 window.scrollBy(0, 400); // переместиться на 400 пискселей вниз от текущей точки
