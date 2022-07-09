@@ -662,6 +662,33 @@ console.log(typeof(Boolean('4'))); // преобразование в булли
 console.log(typeof(Boolean(!!'4'))); // преобразование в буллин тип данных вариант 3
 
 
+#Регулярные выражения // удобно работать со строками, удалять заменять, находить символы, состоит из паттерна (шаблона) и флагов
+new RegExp('pfttern', 'flags')
+/pattern/f
+
+const ans = 'Anna';
+const reg = /n/; // создали паттерн на поиск буквы n (найдет первую n)
+console.log(ans.search(reg)); // применили паттерн через метод search (ищет только первое совпадение), результат в виде номера найденного символа
+console.log(reg.test(ans)); // проверить содержат ли данные букву n, ответ true false 
+// i найти чтото вне зависимости от регистра
+// g найти сразу несколько
+// m многострочный режим
+const reg1 = /n/ig
+console.log(ans.match(reg1)); // ответ в виде обьекта с количеством нахождений индексом, строкой и можем приименять флаги
+
+const pass = 'dlgDjle.4';
+console.log(pass.replace(/./g, "*")); // . - применить ко всем символам замену на *
+console.log(pass.replace(/\./g, "*")); // экранировали символ чтобы сделать поиск именно по точкам
+
+console.log('12-34-02'.replace(/-/g, ':'));
+
+// классы в регулярных выражениях
+// \d ищем цифры \D ищем НЕ цифры
+// \w ищем слова 
+// \s ищем пробелы
+console.log('jljl5l'.match(/\d/g)); // найти все символы и получить массив с ними 
+console.log('my name y2Y'.match(/\w\d\w/gi));// создаем шаблон который найдет комбинацию из буквы цифры буквы, вне зависимости от региистра
+
 #РАЗНОЕ
 debugger; // ставим в коде и консоль будет отсанавливаться в это месте
 
@@ -683,6 +710,19 @@ for (let i = 0; i < 100000; i++) {
 }
 let end = new Date;
 console.log(`цикл отработал за ${end - start}`); // бенчмарк цикла
+
+localStorage.setItem('number', '5'); // глобальный обьект в пределах домена где можем хранить до 5мб данных
+localStorage.getItem('number');
+localStorage.removeItem('number');
+localStorage.clear; // очистиить всё
+
+// храним обьект в localStorage, для этого нужно приобразовать в json перед отправкой
+const persone = {name: 'Alex', age: 25};
+const seializedPersone = JSON.stringify(persone); // преобразуем в json
+localStorage.setItem('alex', seializedPersone);
+console.log(JSON.parse(localStorage.getItem('alex')));
+
+
 
 
 #Задачки
