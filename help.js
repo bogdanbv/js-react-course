@@ -120,6 +120,16 @@ console.log(Object.entries(obj)); // этот метод разбивает об
 console.log(Object.fromEntries(Object.entries(obj))); // обратное действие, превратить массив массивов в обьект
 const json = JSON.stringify(Object.fromEntries(formData.entries())); // превращем formData в массив массивов > превращаем в обьект > превращаем в JSON
             
+let persone = {
+    name: 'Alex',
+    age: 25,
+
+    get userAge() {return this.age;}, // установили свойство геетер которое будет давать возрост
+    set userAge(num) {this.age = num;} // свойство сеетер которое будет устанавливать возраст
+};
+console.log(persone.userAge = 30);
+console.log(persone.userAge);
+    
 
 
 №МАССИВЫ
@@ -391,6 +401,61 @@ class ColredRectangleWithText extends Rectangle { // создаем новый �
 let div = new ColredRectangleWithText(25, 10, 'Hello', 'red');
 div.showMyProps();
 console.log(div.calcArea());
+
+//ИНКАПСУЛЯЦИЕ обеспечивает механизм сокрытия, позволяющий разграничивать доступ к различным компонентам программы
+function User(name, age) { // функция конструктор
+    this.name = name; // публичное свойство
+    let userAge = age; // создали значчение для переменной чтобы свойство не было публичным
+    this.say = function() {
+        console.log(`User name: ${this.name}, age ${userAge}`);
+    };
+    this.getAge = function() {
+        return userAge;
+    };
+    this.setAge = function(age) {
+        if (typeof age === 'number' && age < 110) { // проверяем условиия перед тем как изменить наше значение
+            userAge = age;
+        } else {
+            console.log('Wrong input value');
+        }
+    };
+}
+const ivan = new User('Ivan', 27);
+console.log(ivan.name);
+console.log(ivan.getAge());
+ivan.setAge(20);
+ivan.setAge(399);
+console.log(ivan.getAge());
+ivan.say();
+
+class User { // класс
+constructor(name, age) {
+    this.name = name;
+    this._age = age; // _ чтобы не было доступа к свойству договорились что такие переменный программисты не меняют напрямую
+}
+    #surname = 'Ivanov'; // используя решётку впереди, мы скрываем это свойство для доступа извне // работает только в хроме последней версии
+    say() {
+        console.log(`User name: ${this.name} ${surname}, age ${this._age}`); // обратим вниманиие что surname сюда передаёться
+    }
+    get age() { // применяем get для получения данных
+        return this._age;
+    }
+    set age(age) { // применяем set для установки данных
+        if (typeof age === 'number' && age < 110) { 
+            this._age = age;
+        } else {
+            console.log('Wrong input value');
+        }
+    }
+}
+const ivan = new User('Ivan', 27);
+console.log(ivan.age);
+ivan.age = 99;
+console.log(ivan.age);
+console.log(ivan.surname);
+ivan.say();
+
+
 
 
 #РЕКУРСИЯ когда функция вызывает себя же внутри себя 
@@ -918,6 +983,41 @@ butns.forEach( function(item) {  // переберём все кнопки вн�
 
 item.addEventListener('click', delElement, {once: true}); // добавили третью опцию, котрая позволит произвести событие только один раз
 
+#МОДУЛИ И COMMAND JS WEBPACK ES6 Modules 
+function myModule() {
+    this.hello = function() {
+        console.log('hello');
+    };
+}
+module.exports = myModule; // COMMANDJS добавляем к нашему файлу (main) чтобы иметь возможность экспортировать нашу функцию 
+
+///////ES6 module export
+export let one = 1;
+let two = 2;
+export {two};
+export function sayHi() {
+    console.log('Hi');
+}
+export default function sayHi() { // возможность экспортировать на прямую - import sayHi form './filename'; может быть только один
+    console.log('Hi');
+}
+///////ES6 module import
+import {one, two} from './namefile'; //указывать без js
+import {one as first, two} from './namefile'; //возможность переименовать
+import * as data from './namefile'; // импортировать всё. тогда для вызова нужно использовать data.one (data станет как бы обьектом со свойствамии)
+
+// можно настроить сборку браузером из отдельных файлов, для этого нуужно добавить тег type module и разместить последовательноо файлы в htmlЖ
+<script type='module' src='./js/main.js'></script>
+<script type='module' src='./js/allScripts.js'></script>
+
+npm install webpack webpack-cli --save-dev 
+npm i -g webpack webpack-cli
+webpack
+https://webpack.js.org/guides/getting-started/
+
+const myModule = require('./main'); // вставляем в наш файл чтобы добавить нашу функцию
+const myModuleInstance =  new myModule(); // вариант добавление в файл функции (модуля)
+myModuleInstance.hello // вызов функции
 #СОБЫТИЯ НА МОБИЛЬНЫХ УСТРОЙСТВАХ
 touchstart // касание к элементу
 touchmove // косание с перемещением
