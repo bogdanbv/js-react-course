@@ -787,6 +787,23 @@ const seializedPersone = JSON.stringify(persone); // преобразуем в j
 localStorage.setItem('alex', seializedPersone);
 console.log(JSON.parse(localStorage.getItem('alex')));
 
+//обработка ошибок
+try { // пробуем выполнить эту часть кода
+    console.log('Normal');
+    console.log(a); // специально показываем несуществующую переменную чтобы получить ошибу
+    console.log('result') // этот код не будет работать из за ошибки
+} catch(e) {
+    console.log('error'); // выведем этот код если try была ошибка
+    console.log(e); // показать ошибку    
+    console.log(e.name); // показать имя ошибку  
+    console.log(e.message); // показать сообщение ошибку  
+    console.log(e.stack); // какие функции привели к ошибке  
+} finally {
+    console.log('Этот код выполниться всегда');
+}
+console.log('still normal'); // этот код продолжит выполняться даже если в try ошибка
+
+if (!blockObj.id) throw new Error(`В данных под номером ${i + 1} нет id`) // вывод своих ошибок, сущности все те же name, message, stack
 
 
 
@@ -1005,8 +1022,9 @@ export default function sayHi() { // возможность экспортиро
 import {one, two} from './namefile'; //указывать без js
 import {one as first, two} from './namefile'; //возможность переименовать
 import * as data from './namefile'; // импортировать всё. тогда для вызова нужно использовать data.one (data станет как бы обьектом со свойствамии)
+import exp from 'constants';
 
-// можно настроить сборку браузером из отдельных файлов, для этого нуужно добавить тег type module и разместить последовательноо файлы в htmlЖ
+// можно настроить сборку браузером из отдельных файлов, для этого нуужно добавить тег type module и разместить последовательноо файлы в html и добавить .js к нашим файлам
 <script type='module' src='./js/main.js'></script>
 <script type='module' src='./js/allScripts.js'></script>
 
@@ -1018,6 +1036,7 @@ https://webpack.js.org/guides/getting-started/
 const myModule = require('./main'); // вставляем в наш файл чтобы добавить нашу функцию
 const myModuleInstance =  new myModule(); // вариант добавление в файл функции (модуля)
 myModuleInstance.hello // вызов функции
+
 #СОБЫТИЯ НА МОБИЛЬНЫХ УСТРОЙСТВАХ
 touchstart // касание к элементу
 touchmove // косание с перемещением
