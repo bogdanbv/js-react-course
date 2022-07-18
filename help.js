@@ -380,6 +380,9 @@ function* generator() { // функция генератор которая бу
 const str = generator();
 console.log(str.next()); // получить следующее значение и буллиновое значения законченна ли функция
 console.log(str.next().value); // получить следующее значение
+for (let k of str) { // чтобы получиить все значения функции генератора
+    console.log(k);
+}
 
 #КЛАССЫ // красивая обёртка функций конструкторов
 class Rectangle { // название класса всегда с большой буквы
@@ -966,6 +969,31 @@ wrapper.addEventListener('click', (event) => {  // вешаем обработч
         console.log('hello');
     }
 });
+
+// WEB API Animation Element.animate()
+https://developer.mozilla.org/ru/docs/Web/API/Element/animate
+const images = document.querySelectorAll('img');
+const phoneAnimation = images[0].animate([
+    {transform: 'translateX(0)',
+     filter: 'opacity(100%)'},
+    {transform: 'translateX(100px)',
+    filter: 'opacity(30%)'},
+    {transform: 'translateX(-100px)',
+    filter: 'opacity(80%)'},
+    {transform: 'translateX(0)',
+    filter: 'opacity(100%)'}
+], {
+    duration: 3000,
+    iterations: 5
+});
+
+// Микро и макро задачи
+() => {}
+microtask: then/catch/finally
+render
+() => {}
+microtask: then/catch/finally
+render
 
 #СОБЫТИЯ
 let btn = document.querySelector('button');
