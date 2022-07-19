@@ -59,4 +59,20 @@ class Field extends React.Component {
   };
 }
 
-
+## Свойства Props компонентов // пропсы (name sorname link) являються не изменяемыми и доступны только на чтение
+function WhoAmi (props) { // function WhoAmi ({name, surname, link}) {
+  return(
+    <div>
+      <h1>My name is {props.name}, surname - {props.surname}</h1> // <h1>My name is {name}, surname - {surname}</h1>
+      <a href={props.link}>My Profile</a>
+    </div>  
+  )
+};
+function App() {
+  return (
+    <div className="App">
+      <WhoAmi name="John" surname="Smith" link="facebook.com"/>
+      <WhoAmi name="Ivan" surname="Pavlov" link="twitter.com"/>
+    </div>
+  );
+};
