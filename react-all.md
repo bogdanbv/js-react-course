@@ -76,3 +76,24 @@ function App() {
     </div>
   );
 };
+
+ID MAP и получение элементов с базы
+const data = [
+        {name: 'John C.', salary: 800, increase: true, id: '1'},
+        {name: 'David J.', salary: 3000, increase: false, id: '2'},
+        {name: 'Ammy C.', salary: 5000, increase: false, id: '3'}
+    ];
+const EmployersList = ({data}) => {
+    const elements = data.map(item => {
+        const {id, ...itemProps} = item;
+        return (
+            <EmployersListItem key={id} {...itemProps}/> // <EmployersListItem name={item.name} salary={item.salary}/>
+        )
+    })
+
+    return (
+        <ul className="app-list list-group">
+            {elements}
+        </ul>
+    )
+}
