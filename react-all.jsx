@@ -164,3 +164,13 @@ commitInputChanges = (e) => {
 }
 
 <input type="text" onInput={(e) => this.commitInputChanges(e, 'some color')} /> // вариант передачи аргумента через стрелочную функцию
+
+[e.target.name]: e.target.value // скобки чтобы записать свойство в обьект
+
+// Упраляемый элемент/компонент. значене поместили в value и теперь оно упраляемо reactom
+<input type="text"
+  className="form-control new-post-label"
+  placeholder="Как его зовут?" 
+  name="name"
+  value={name}
+  onChange={this.onValueChange}/>
