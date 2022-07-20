@@ -97,3 +97,70 @@ const EmployersList = ({data}) => {
         </ul>
     )
 }
+
+this.nextYear = this.nextYear.bind(this); // привязка метода/функции к конкретному экземляру класса, чтобы не терять контекст вызова
+<button onClick={() => this.nextYear()}>{this.state.text}</button> // вызов через анонимную функцию, чтобы не терять контекст вызова
+
+
+## состояние компонента state 
+- компонент может содержать состояние которое может меняться, 
+может быть как у классовых так и у функциональных компонентов, 
+можно менять только через команду setState, 
+это асинхронная операция (если надо синхронную то используем каллбек функц), 
+можем менять только то что нам нужно
+
+import React, {Component} from 'react'; // импортируем компонент из реакт
+
+class WhoAmi extends Component { // создали классовый элемент с наследованием компонента из React
+  constructor(props) { // задали пропсы для конструктора
+    super(props);
+    this.state = { // используем state чтобы добавить изменяющиеся значения
+      years: 27,
+      text: '+++'
+    }
+  }
+
+  // используем такую конструкцию есил нам не важно предыдущее результат не зависит от предыдущего значения state
+  nextYear2 = () => { 
+    this.setState({
+      years: this.state.years + 1 
+    })
+  }
+
+  // Используем этот вариант (со стрелочной функцией) если результат зависит от предыдущего значения state,
+  nextYear = () => { 
+    this.setState(state => ({
+      years: state.years + 1 // меняем значение. команда меняет только значения которые изменились и указаны тут, остальные значения (text) передадуться без измененй
+  }))
+  }
+
+  render() {
+    const {name, surname, link} = this.props; // деструктуризируем значения из props чтобы применить их удобно
+    return (
+      <div>
+        <button onClick={this.nextYear}>{this.state.text}</button>
+        <h1>My name is {name}, surname - {surname}, age - {this.state.years}</h1>
+        <a href={link}>My profile</a>
+      </div>
+    )
+  }
+}
+
+function App() {
+  return (
+    <div className="App">
+      <WhoAmi name="John" surname="Smith" link="ya.com"/>
+      <WhoAmi name="Alex" surname="Ford" link="ind.com"/>
+    </div>
+  )
+}
+
+## События
+onClick={function()}, onChange={function()}, 
+
+<input type="text" onInput={this.commitInputChanges} />
+commitInputChanges = (e) => {
+  console.log(e.target.value);
+}
+
+<input type="text" onInput={(e) => this.commitInputChanges(e, 'some color')} /> // вариант передачи аргумента через стрелочную функцию
