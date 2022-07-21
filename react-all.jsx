@@ -174,3 +174,22 @@ commitInputChanges = (e) => {
   name="name"
   value={name}
   onChange={this.onValueChange}/>
+
+  // обьекты нельзя изменить, можно создать новый и заменить им существующий иммутабельность https://habr.com/ru/company/developersoft/blog/302118/
+  // Изменение элементов в state
+  deleteItem = (id)=> {
+    this.setState(({data}) => {
+        // const index = data.findIndex(elem => elem.id === id); // проверяем совпадает ли индекс элемента с ид нашшего елементаа
+        
+        // const before = data.slice(0, index); // вытаскиваем все елементы до найденного элемента
+        // const after = data.slice(index + 1); // вытаскиваем все елементы после найденного элемента
+        
+        // const newArr = [...before, ...after]; // создаём новый массив
+        // return {
+        //     data: newArr // заменяем старый массив, новым
+        // }
+        return {
+          data: data.filter(item => item.id !== id)
+        }
+    })
+}
