@@ -8,6 +8,9 @@ firebase-debug.log*
 firebase-debug.*.log*
 lesson4-tabs/node_modules
 lesson4-tabs/webpack
+chrome extension/
+lesson4-tabs/js/bundle.js.LICENSE.txt
+
 
 # Firebase cache
 .firebase/

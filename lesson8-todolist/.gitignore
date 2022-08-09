@@ -5,6 +5,7 @@
 /.pnp
 .pnp.js
 /lesson4-tabs/js/bundle.js.LICENSE.txt
+/chrome extension/
 
 # testing
 /coverage
